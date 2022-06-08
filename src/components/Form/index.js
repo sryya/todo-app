@@ -1,28 +1,31 @@
-import {useState} from 'react';
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-function Form({taskList,setTaskList}){
-    const [task,setTask]=useState({nstate:null,task:''});
-    const onChangeInput=(e)=>{
-        setTask({[e.target.name]:e.target.value});
-        
+const Form = ({ taskList, setTaskList }) => {
+    const [task, setTask] = useState({ id: '',completed: false, task: '' });
+    const onChangeInput = (e) => {
+        setTask({ id: uuidv4(), task: e.target.value, completed: false });
     }
-    const onSubmit=(e)=>{
-    
-        e.preventDefault();
-       setTaskList([...taskList,{state:"false",task:task.task}]);
-       setTask({state:null,task:''});
+    const onSubmit = (e) => {
+
+        if (task !== '') {
+            e.preventDefault();
+            setTaskList([...taskList, task]);
+            console.log(taskList)
+            setTask({ completed: false, task: '' });
+        }
     }
     return (
         <div>
             <form onSubmit={onSubmit}>
-                <input 
-                onChange={onChangeInput}
-                type="text" 
-                name="task" 
-                id="task"
-                value={task.task}
-                placeholder='Add New Task' />
-                
+                <input
+                    onChange={onChangeInput}
+                    type="text"
+                    name="task"
+                    id={task.id}
+                    value={task.task}
+                    placeholder='Add New Task' />
+
                 <button >Add Task</button>
             </form>
         </div>

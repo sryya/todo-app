@@ -4,7 +4,7 @@ class _header extends Component {
     render() {
         return (
             <div>
-                todos
+                <h1>todos</h1>
             </div>
         );
     }

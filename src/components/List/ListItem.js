@@ -11,6 +11,9 @@ const ListItem = ({taskList, setTaskList, item}) => {
         setTaskList(prevList => prevList.map((task) => task.id === id ? item: task))
         console.log(taskList)
     }
+    
+    
+    
     return (
         <div key={item.id}><label >
 

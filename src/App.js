@@ -8,9 +8,6 @@ import './App.css';
 function App() {
   const [taskList,setTaskList] =useState([]);
   const [selectPage,setSelectPage]=useState('all');
-  // useEffect(() => {
-  //   console.log(taskList);
-  // }, [taskList]);
   return (
     <div className="App">
   
@@ -19,7 +16,7 @@ function App() {
       <Form taskList={taskList} setTaskList={setTaskList}/>
       <List taskList={taskList} setTaskList={setTaskList} selectPage={selectPage} />
       
-      <Footer selectPage={selectPage} setSelectPage={setSelectPage}/>
+      <Footer selectPage={selectPage} setSelectPage={setSelectPage} taskList={taskList} setTaskList={setTaskList} />
       </div>
 
 </div>)

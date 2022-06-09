@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Checkbox from "@mui/material/Checkbox"
 import { v4 as uuidv4 } from 'uuid';
 
 const Form = ({ taskList, setTaskList }) => {
@@ -15,9 +16,29 @@ const Form = ({ taskList, setTaskList }) => {
             setTask({ completed: false, task: '' });
         }
     }
+    const allDoneTask=()=>{
+        const doneCount =taskList.filter(task => task.completed===true).length()
+        if(doneCount===taskList.length)
+        {
+            const newList =[...taskList.forEach(task => {
+                task.completed=!task.completed;
+            })]
+            setTaskList(newList);
+        }
+        else{
+            const newList =[taskList.forEach(task => {
+                task.completed=true;
+            })];
+            setTaskList(newList);
+            console.log(`list: ${taskList}`);
+        }
+    }
     return (
         <div>
+            
             <form onSubmit={onSubmit}>
+            
+			<Checkbox onClick={allDoneTask}/>
                 <input
                     onChange={onChangeInput}
                     type="text"

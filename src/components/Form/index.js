@@ -3,16 +3,22 @@ import Checkbox from "@mui/material/Checkbox";
 import { v4 as uuidv4 } from "uuid";
 
 const Form = ({ taskList, setTaskList }) => {
-  const [task, setTask] = useState({ id: "", completed: false, task: "" });
+  const [task, setTask] = useState({ id: null, completed: false, task: "" });
   const onChangeInput = (e) => {
     setTask({ id: uuidv4(), task: e.target.value, completed: false });
   };
   const onSubmit = (e) => {
-    if (task !== "") {
+    if (task.task !== "" && task.id !== null) {
       e.preventDefault();
       setTaskList([...taskList, task]);
+      let allTasks = JSON.parse(localStorage.getItem("taskList")) || [];
+      allTasks.push(task);
+      localStorage.setItem('taskList', JSON.stringify(allTasks));      
       console.log(taskList);
       setTask({ completed: false, task: "" });
+    }
+    else {
+      return;
     }
   };
   const allDoneTask = () => {
